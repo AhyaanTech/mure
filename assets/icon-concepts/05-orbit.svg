@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
-  <title id="title">Orbit — independent panes around a common center</title>
-  <rect x="8" y="8" width="112" height="112" rx="27" fill="#273e72"/>
-  <path d="M64 29c19 0 35 16 35 35S83 99 64 99 29 83 29 64 45 29 64 29Z" fill="none" stroke="#8bb4e0" stroke-width="7"/>
-  <rect x="52" y="17" width="24" height="24" rx="7" fill="#f4efe3"/>
-  <rect x="18" y="70" width="24" height="24" rx="7" fill="#f1bc85"/>
-  <rect x="86" y="70" width="24" height="24" rx="7" fill="#b6e1d1"/>
-  <circle cx="64" cy="64" r="7" fill="#f4efe3"/>
-</svg>

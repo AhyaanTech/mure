@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
-  <title id="title">Flock — three windows moving together</title>
-  <rect x="8" y="8" width="112" height="112" rx="27" fill="#203f45"/>
-  <path d="M26 43 49 29 72 43 49 57Z" fill="#a8e4cc"/>
-  <path d="M56 62 79 48 102 62 79 76Z" fill="#f2d784"/>
-  <path d="M26 81 49 67 72 81 49 95Z" fill="#f7f3e8"/>
-</svg>

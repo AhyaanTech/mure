@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
-  <title id="title">Fold — an M formed from connected panes</title>
-  <rect x="8" y="8" width="112" height="112" rx="27" fill="#dbe9df"/>
-  <path d="M26 94V34h15l23 29 23-29h15v60H87V58L64 85 41 58v36Z" fill="#205c54"/>
-  <path d="m41 34 23 29 23-29H73l-9 11-9-11Z" fill="#e08b69"/>
-</svg>
