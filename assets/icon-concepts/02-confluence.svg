@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Confluence — separate paths sharing a destination</title>
+  <rect x="8" y="8" width="112" height="112" rx="27" fill="#e9c26b"/>
+  <path d="M34 33v20c0 17 12 29 30 29h30M64 33v19c0 17 12 30 30 30M94 33v29" fill="none" stroke="#343953" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="94" cy="82" r="8" fill="#343953"/>
+</svg>
