@@ -1,6 +1,31 @@
 # Mure design
 
-**PROPOSED — not implemented.** Interface names and behavior here are design proposals, not delivery authorization. The [workbench draft](docs/issues/persistent-workbench/KFDQFD-spec.md) is a held outcome reference. Use roadmap cards to develop bounded specs; settle architecture and the first release before implementation. See [PRODUCT.md](PRODUCT.md) for intent and [CONTEXT.md](CONTEXT.md) for domain language.
+**Not implemented.** Only the foundation increment below is accepted for delivery. Other interfaces and runtime behavior remain design proposals, not delivery authorization. The [workbench draft](docs/issues/persistent-workbench/KFDQFD-spec.md) is a held outcome reference; use roadmap cards to develop later bounded specs. See [PRODUCT.md](PRODUCT.md) for intent and [CONTEXT.md](CONTEXT.md) for domain language.
+
+## Accepted foundation increment
+
+The [accepted foundation spec](docs/issues/extension-foundation/B2FBK0-spec.md) governs
+only the next bounded increment; it is not implemented yet. Start with one strict-TypeScript extension
+package, npm/lockfile, compiler output, native VS Code tests and local VSIX packaging.
+There is no runtime dependency or bundle-size problem yet, so begin without a bundler.
+
+Accepted contributor-facing layout direction (not existing implementation):
+
+```text
+package.json / package-lock.json   extension manifest and reproducible tooling
+src/extension.ts                 activation, disposal and minimal diagnostics
+test/                            native extension integration tests
+out/                             generated JavaScript; ignored by Git
+.vscode/                         extension-development launch/build configuration
+docs/                            existing product, domain and Tiki documentation
+```
+
+Keep implemented code small; split modules when real responsibilities appear. Future
+Herdr/filesystem/VS Code adapters perform effects, while pure identity/reconciliation
+policy remains independent of those APIs. The foundation does not create empty folders,
+interfaces or services for them. Only a manually invoked status command is in scope;
+no background following, binding or membership behavior is implemented in this step.
+Build/package checks belong here; publishing a release remains separate roadmap work.
 
 ## Shape
 
@@ -79,4 +104,4 @@ Keep settings small: `homeDirectory`, cleanup mode (`offer` or `automatic`), and
 - Exercise a pure reconciler with fake snapshots for canonical-path deduplication, all-pane membership, stale workspace metadata, exclusions, ownership, missing paths, incomplete state, and cleanup protection.
 - Use real VS Code extension-host tests to verify ordinary updates never mutate the first root or reload the host. Verify Explorer selection and separately observe OS keyboard focus during background following; host-level assertions alone do not establish it.
 - Test concurrent/duplicate activation, coalescing, write serialization and stale-plan revalidation, reconnect without focus replay, and persistence across restart.
-- Proposed distribution is an MIT-licensed public VS Code extension via GitHub Releases VSIX, not Marketplace initially. No scaffold or build-tool choice has been accepted.
+- Proposed distribution is an MIT-licensed public VS Code extension via GitHub Releases VSIX, not Marketplace initially. The accepted foundation selects TypeScript/compiler output, npm and native extension test/package tools; no scaffold exists yet.

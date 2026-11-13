@@ -3,7 +3,9 @@
 **Status: product direction; no extension implementation yet.** Develop capabilities
 through [roadmap cards](docs/roadmap/), then individually reviewed and accepted bounded
 specs under [`docs/issues/`](docs/issues/). The current broad workbench draft is a held
-outcome reference, not a whole-extension delivery assignment. Architecture and the first
+outcome reference, not a whole-extension delivery assignment. The
+[foundation spec](docs/issues/extension-foundation/B2FBK0-spec.md) is accepted for a
+loadable extension and contributor workflow only; runtime features and their first
 release boundary remain to be settled.
 
 ## Purpose
@@ -108,5 +110,5 @@ branding. Keep the README small.
 - [`CONTEXT.md`](CONTEXT.md): terminology.
 - [`DESIGN.md`](DESIGN.md): proposed architecture, interfaces and unresolved implementation details.
 - [`AGENTS.md`](AGENTS.md): repository working instructions.
-- [`docs/roadmap/`](docs/roadmap/): capability intake before bounded specs; initially empty.
+- [`docs/roadmap/`](docs/roadmap/): capability intake before bounded specs; phases are not an approved release sequence.
 - [`docs/issues/`](docs/issues/): feature specs and eventual delivery artifacts; acceptance is explicit.
