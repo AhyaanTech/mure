@@ -1,0 +1,7 @@
+# Tiki authority is limited to active issue/spec and roadmap artifacts.
+*
+!docs/
+!docs/issues/
+!docs/issues/**/*.md
+!docs/roadmap/
+!docs/roadmap/**/*.md

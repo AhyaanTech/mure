@@ -1,0 +1,121 @@
+version: "0.6.1"
+description: |
+  Mure authoritative Tiki workflow (AhyaanSkills ADR 0009). The repository-root workflow and
+  root-scoped Ruki queries are the pipeline authority.
+fields:
+  - name: status
+    type: enum
+    caption: "Status"
+    values:
+      - {value: needs-triage, label: "Needs Triage", default: true}
+      - {value: needs-info, label: "Needs Info"}
+      - {value: ready-for-agent, label: "Ready for Agent"}
+      - {value: in-progress, label: "In Progress"}
+      - {value: review-pending, label: "Review Pending"}
+      - {value: ready-for-human, label: "Ready for Human"}
+      - {value: wontfix, label: "Wontfix"}
+      - {value: done, label: "Done"}
+  - name: type
+    type: enum
+    caption: "Type"
+    values:
+      - {value: spec, label: "Spec"}
+      - {value: ticket, label: "Ticket"}
+      - {value: integration, label: "Integration"}
+      - {value: roadmap, label: "Roadmap"}
+  - name: dependsOn
+    type: tikiIdList
+    caption: "Depends On"
+  - name: risk
+    type: enum
+    caption: "Risk"
+    values:
+      - {value: behavioral, label: "Behavioral"}
+      - {value: mechanical, label: "Mechanical"}
+      - {value: low, label: "Low"}
+      - {value: high, label: "High"}
+  - name: phase
+    type: text
+    caption: "Phase"
+
+actions:
+  - key: Enter
+    kind: view
+    label: Open
+    view: Detail
+    require: ["selection:one"]
+  - key: "P"
+    kind: ruki
+    label: Copy absolute path
+    action: select filepath where id = id() | clipboard()
+
+views:
+  - name: Delivery
+    kind: board
+    description: "Delivery frontier and lifecycle queues"
+    default: true
+    key: F1
+    layout: |
+      id + " " + title
+    lanes:
+      - name: Triage
+        filter: select where type in ["ticket", "integration"] and status in ["needs-triage", "needs-info"] order by updatedAt
+      - name: Dispatchable
+        filter: select where type in ["ticket", "integration"] and status = "ready-for-agent" and not (dependsOn any status != "done") order by updatedAt
+      - name: In Progress
+        filter: select where type in ["ticket", "integration"] and status = "in-progress" order by updatedAt
+      - name: Review
+        filter: select where type in ["ticket", "integration"] and status = "review-pending" order by updatedAt
+      - name: Human
+        filter: select where type in ["ticket", "integration"] and status = "ready-for-human" and not (dependsOn any status != "done") order by updatedAt
+      - name: Blocked
+        filter: select where type in ["ticket", "integration"] and dependsOn any status != "done" order by updatedAt
+
+  - name: Specs
+    kind: list
+    description: "Specs still progressing through the delivery lifecycle"
+    key: F2
+    layout: |
+      id + " " + title
+    lanes:
+      - name: Specs
+        filter: select where type = "spec" and status != "done" and status != "wontfix" order by status, updatedAt desc
+
+  - name: Spec Archive
+    kind: list
+    description: "Landed and abandoned specs retained for history"
+    key: F4
+    layout: |
+      id + " " + title
+    lanes:
+      - name: Archived specs
+        filter: select where type = "spec" and status in ["done", "wontfix"] order by updatedAt desc
+
+  - name: Roadmap
+    kind: board
+    description: "Roadmap intake and promotion"
+    key: F3
+    layout: |
+      id + " " + title + " (" + phase + ")"
+    lanes:
+      - name: Inbox
+        filter: select where type = "roadmap" and status = "needs-triage" order by phase
+      - name: Grilling
+        filter: select where type = "roadmap" and status = "needs-info" order by phase
+      - name: Promoted
+        filter: select where type = "roadmap" and status = "done" order by phase
+      - name: Rejected
+        filter: select where type = "roadmap" and status = "wontfix" order by updatedAt desc
+
+  - name: Detail
+    kind: detail
+    description: "Selected Tiki's typed state and Markdown body"
+    require: ["selection:one"]
+    layout: |
+      <highlight>title | --
+      "Status:" | status
+      "Type:" | type
+      "Risk:" | risk
+      "Depends on:" | dependsOn
+      "Phase:" | phase
+      "Updated:" | updatedAt
